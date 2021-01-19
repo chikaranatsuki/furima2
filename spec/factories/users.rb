@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :user do
     nickname { Faker::Internet.username }
     password { 'la' + Faker::Internet.password(min_length: 7, max_length: 20) }
-    email { Faker::Internet.email }
+    email { Faker::Internet.free_email}
     birth_date { Faker::Date.between_except(from: 20.year.ago, to: 1.year.from_now, excepted: Date.today) }
     first_name {'山田'}
     last_name {'太郎'}
