@@ -18,9 +18,9 @@ class PayForm
       item_id: item_id,
       user_id: user_id
     )
-    address.create(
+    Address.create(
       order_id: order.id,
-      postal_cord: postal_cord,
+      postal_code: postal_code,
       prefecture_id: prefecture_id,
       city: city,
       address: address,
