@@ -4,12 +4,13 @@
 <div class="item-show">
   <div class="item-box">
     <h2 class="name">
-      <%= @item.user.nickname %>
+      <%= @item.name %>
     </h2>
     <div class='item-img-content'>
+    <%# 画像が表示されており、画像がリンク切れなどになっていないこと %>
       <%= image_tag @item.image ,class:"item-box-img" %>
       <%# 商品が売れている場合は、sold outを表示しましょう %>
-      <% if @item.present? %>
+      <% if @item.order != nil%>  
       <div class='sold-out'>
         <span>Sold Out!!</span>
       </div>
@@ -27,20 +28,23 @@
 
     <%# ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
 <% if user_signed_in? %>
+<%# ログイン状態の出品者のみ、「商品の編集」「削除」ボタンが表示されること %>
     <% if current_user == @item.user %>
     <%= link_to '商品の編集', edit_item_path(@item), method: :get, class: "item-red-btn" %>
     <p class='or-text'>or</p>
     <%= link_to '削除', item_path(@item), method: :delete, class:'item-destroy' %>
     <% else %>
     <%# 商品が売れていない場合はこちらを表示しましょう %>
+<% if @item.order == nil%>
     <%= link_to '購入画面に進む', item_orders_path(item_id: @item) ,class:"item-red-btn"%>
+<% end %>
     <%# //商品が売れていない場合はこちらを表示しましょう %>
     <% end %>
 <% end %>
 
 
     <%# //ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
-
+<%# 商品出品時に登録した情報（商品名・商品画像・販売価格・配送料負担・商品説明・出品者名・カテゴリー・商品の状態・発送元の地域・発送日の目安）が、見本アプリと同様の形で出力されること %>
     <div class="item-explain-box">
       <span><%= "商品説明" %></span>
     </div>
