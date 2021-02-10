@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
+  before_action :move_to_index
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+
 
   def index
     @items = Item.includes(:user).order("created_at DESC")
@@ -58,5 +60,9 @@ class ItemsController < ApplicationController
       :price
     ).merge(user_id: current_user.id)
   end
+  def move_to_index
+    return redirect_to root_path if current_user.id != @item.user.id || @item.order.present? # 追記
+  end
+
 
 end
