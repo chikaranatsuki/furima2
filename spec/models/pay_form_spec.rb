@@ -7,6 +7,7 @@ RSpec.describe PayForm, type: :model do
     item = FactoryBot.build(:item, user_id: seller.id)
     item.save
     @order = FactoryBot.build(:pay_form, user_id: buyer.id,item_id: item.id )
+    sleep 1
 
     # @user = FactoryBot.create(:user)
     # @item = FactoryBot.create(:item)
@@ -17,7 +18,7 @@ RSpec.describe PayForm, type: :model do
       it '全て正常' do
         expect(@order).to be_valid
       end
-      it 'address:なくても保存ができる'
+      # it 'address:なくても保存ができる'
       end
     end
     context '内容に問題がある場合' do
@@ -94,4 +95,3 @@ RSpec.describe PayForm, type: :model do
       end
     end
   end
-
