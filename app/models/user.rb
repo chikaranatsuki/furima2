@@ -22,6 +22,6 @@ class User < ApplicationRecord
   end
 
   end
-  has_many :item
-  has_many :order
+  has_many :items
+  has_many :orders
 end
