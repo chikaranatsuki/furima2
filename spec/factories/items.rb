@@ -10,9 +10,12 @@ FactoryBot.define do
     scheduled_delivery_id { 1 }
     association :user
 
-    trait :image do
-      image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/sample.png')) }
-    end
+    # trait :image do
+    #   image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/sample.png')) }
+    # end
+    after(:build) {|item| item.image.attach(io: File.open('spec/fixtures/sample.png'), filename: 'sample.png', content_type: 'image/png')}
+
+
 
 
   end

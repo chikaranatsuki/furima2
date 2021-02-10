@@ -7,8 +7,8 @@ class PayForm
     validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/}
     validates :prefecture_id, numericality: { other_than: 0 }
     validates :city
-    validates :address
-    validates :phone_number
+    # validates :address
+    validates :phone_number, length: {maximum: 11} , format: { with: /\A[0-9]+\z/}
     validates :user_id
     validates :item_id
     validates :token
