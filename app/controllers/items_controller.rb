@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
-  before_action :move_to_index, only: [:edit, :update, :destory]
+  # before_action :move_to_index, only: [:edit, :update, :destory]
 
 
   def index
@@ -28,22 +28,31 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
+    # @item = Item.includes(:user).order(created_at: :desc).with_attached_image
+    return redirect_to root_path if current_user.id != @item.user.id
   end
 
   def update
     @item = Item.find(params[:id])
-    @item.update(item_params)
-    if @item.save
+    # @item = Item.includes(:item_purchase).order(created_at: :desc).with_attached_image    @item.update(item_params)
+    if current_user.id == @item.user.id
+      @item.update(item_params)
       redirect_to root_path
     else
-      render :edit
+      redirect_to root_path
     end
   end
 
   def destroy
     @item = Item.find(params[:id])
-    @item.destroy
-    redirect_to root_path
+    # @item = Item.includes(:item_purchase).order(created_at: :desc).with_attached_image    @item.destroy
+    if current_user.id == @item.user.id
+      @item.destroy
+      redirect_to root_path
+    else
+      redirect_to root_path
+    end
+  
   end
   
   private
@@ -61,9 +70,10 @@ class ItemsController < ApplicationController
       :price
     ).merge(user_id: current_user.id)
   end
-  def move_to_index
-    return redirect_to root_path if current_user.id == @item.user.id
-  end
+  
+  # def move_to_index
+  #   return redirect_to root_path if current_user.id == @item.user.id
+  # end
   
   
 
