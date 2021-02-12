@@ -61,6 +61,10 @@ class ItemsController < ApplicationController
       :price
     ).merge(user_id: current_user.id)
   end
-
+  def move_to_index
+    return redirect_to root_path if current_user.id == @item.user.id
+  end
+  
+  
 
 end
