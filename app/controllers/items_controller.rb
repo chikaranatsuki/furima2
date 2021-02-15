@@ -29,7 +29,7 @@ class ItemsController < ApplicationController
   def edit
     @item = Item.find(params[:id])
     # @item = Item.includes(:user).order(created_at: :desc).with_attached_image
-    return redirect_to root_path if current_user.id != @item.user.id
+    return redirect_to root_path if current_user.id != @item.user.id ||  @item.order != nil
   end
 
   def update

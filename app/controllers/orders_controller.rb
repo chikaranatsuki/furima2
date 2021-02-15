@@ -4,7 +4,11 @@ class OrdersController < ApplicationController
   before_action :move_to_index
 
   def index
-    @order = PayForm.new
+    if @item.order == nil
+      @order = PayForm.new
+    else
+      redirect_to root_path
+    end
   end
 
   def create
