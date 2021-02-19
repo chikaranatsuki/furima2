@@ -3,12 +3,15 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  
+  #バリデーションをまとめてかけられる。
+  # 条件付きのバリデーションを定義する
   with_options presence: true do
-    validates :nickname 
+    # ニックネーム必須
+    validates :nickname
+    # 誕生日必須 
     validates :birth_date
-
-  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
+    # ６文字以上半角英数字混合
+  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,100}+\z/i.freeze
   validates_format_of :password, with: PASSWORD_REGEX
   
   with_options format: { with: /\A[ぁ-んァ-ン一-龥]/} do
