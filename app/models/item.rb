@@ -24,6 +24,7 @@ class Item < ApplicationRecord
 
   #　金額の範囲
   validates_inclusion_of :price, in: 300..9999999
+  # /\A[0-9]+\z/i半角数字のみ
   # ..:rubyの範囲オブジェクト　https://docs.ruby-lang.org/ja/latest/class/Range.html
 
   #選択関係で[---]のままになっていないか検証

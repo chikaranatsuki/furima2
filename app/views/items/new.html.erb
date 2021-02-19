@@ -55,6 +55,7 @@
           商品の状態
           <span class="indispensable">必須</span>
         </div>
+        <%# モデル名はキャメルケース %>
         <%= f.collection_select(:sales_status_id, SalesStatus.all, :id, :example, {}, {class:"select-box", id:"item-sales-status"}) %>
       </div>
     </div>
