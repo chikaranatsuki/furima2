@@ -2,16 +2,16 @@ require 'rails_helper'
 
 RSpec.describe PayForm, type: :model do
   before do
-    buyer = FactoryBot.create(:user)
-    seller = FactoryBot.create(:user)
-    item = FactoryBot.build(:item, user_id: seller.id)
-    item.save
-    @order = FactoryBot.build(:pay_form, user_id: buyer.id,item_id: item.id )
-    sleep 1
+    # buyer = FactoryBot.create(:user)
+    # seller = FactoryBot.create(:user)
+    # item = FactoryBot.build(:item, user_id: seller.id)
+    # item.save
+    # @order = FactoryBot.build(:pay_form, user_id: buyer.id,item_id: item.id )
+    # sleep 1
 
-    # @user = FactoryBot.create(:user)
-    # @item = FactoryBot.create(:item)
-    # @order = FactoryBot.build(:pay_form, user_id: @user, item_id: @item)
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item)
+    @order = FactoryBot.build(:pay_form, user_id: user.id, item_id: item.id)
   end
   describe '商品購入' do
     context '内容に問題ない場合' do

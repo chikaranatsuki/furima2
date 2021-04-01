@@ -29,5 +29,4 @@ class PayForm
       phone_number: phone_number
     )
   end
-
 end

@@ -18,17 +18,17 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
       it 'name:必須' do
-        @item.name = nil
+        @item.name = ""
         @item.valid?
         expect(@item.errors.full_messages).to include("Name can't be blank")
       end
       it 'info:必須'do
-        @item.info = nil
+        @item.info = ""
         @item.valid?
         expect(@item.errors.full_messages).to include("Info can't be blank")
       end
       it 'price:必須' do
-        @item.price = nil
+        @item.price = ""
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end

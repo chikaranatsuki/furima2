@@ -1,10 +1,14 @@
 class ItemsController < ApplicationController
+  # ログイン状態のユーザーのみ、商品出品ページへ遷移できること
+  # ログアウト状態のユーザーは、商品出品ページへ遷移しようとすると、ログインページへ遷移すること
+  # ログアウト状態のユーザーでも、商品一覧表示ページを見ることができること
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   # before_action :move_to_index, only: [:edit, :update, :destory]
 
 
   def index
+    # 上から、出品された日時が新しい順に表示されること("created_at DESC")
     @items = Item.includes(:user).order("created_at DESC")
   end
 
@@ -14,12 +18,13 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    
+    # エラーハンドリングができていること（入力に問題がある状態で「出品する」ボタンが押された場合、情報は保存されず、出品ページに戻りエラーメッセージが表示されること）
     if @item.valid?
-    @item.save
-    return redirect_to root_path
+      @item.save
+      redirect_to root_path
+    else
+      render 'new'
     end
-    render 'new'
   end
 
   def show
