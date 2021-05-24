@@ -38,7 +38,7 @@ RSpec.describe User, type: :model do
     it "passwordが空では登録できない" do
       @user.password = ""
       @user.valid?
-      # binding.pry
+      binding.pry
       expect(@user.errors.full_messages).to include("Password can't be blank")
     end
     it "passwordが５文字以下の場合、登録できない" do

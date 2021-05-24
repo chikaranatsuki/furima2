@@ -3,10 +3,10 @@ const pay = () => {
   const form = document.getElementById("charge-form");
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-
+debugger;
     const formResult = document.getElementById("charge-form");
-    const formData = new FormData(formResult);
- 
+    const formData = new FormData(formResult)
+ console.log(formData)
 
     const card = {
       number: formData.get("pay_form[number]"),
@@ -20,8 +20,11 @@ console.log(card)
       // console.log(responce)
       if (status == 200) {
         const token = response.id;
+        console.log(token)
         const renderDom = document.getElementById("charge-form");
         const tokenObj = `<input value=${token} name='token' > `;
+        console.log(tokenObj)
+        debugger
         renderDom.insertAdjacentHTML("beforeend", tokenObj);
       }
 
@@ -33,5 +36,4 @@ console.log(card)
     });
   });
 };
-
-window.addEventListener("load", pay);
+window.addEventListener("load",pay)

@@ -12,7 +12,7 @@ class User < ApplicationRecord
     validates :birth_date
     # ６文字以上半角英数字混合
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,100}+\z/i.freeze
-  validates_format_of :password, with: PASSWORD_REGEX
+  validates_format_of :password, with: PASSWORD_REGEX, allow_blank: true
   
   with_options format: { with: /\A[ぁ-んァ-ン一-龥]/} do
     validates :last_name  
