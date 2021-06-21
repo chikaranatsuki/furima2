@@ -8,15 +8,16 @@ class Item < ApplicationRecord
   belongs_to :scheduled_delivery
 
   # <<アクティブストレージの設定関連>>
-  has_one_attached :image
+  has_many_attached :images
 
     # <<アソシエーション>>
     belongs_to :user
     has_one :order
+    has_one :item_order
 
     #<<バリデーション>>
   with_options presence: true do
-    validates :image
+    validates :images
     validates :name
     validates :info
     validates :price

@@ -20,7 +20,7 @@
       <%# ログイン状態では、ヘッダーにユーザーのニックネーム/ログアウトボタンが表示されること %>
 
       <% if user_signed_in? %>
-        <li><%= link_to current_user.nickname, "#", class: "user-nickname" %></li>
+        <li><%= link_to current_user.nickname, user_path(current_user), class: "user-nickname" %></li>
         <%# ヘッダーのログアウトボタンをクリックすることで、ログアウトができること %>
         <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %></li> 
         <% else %>
